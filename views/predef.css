@@ -1,0 +1,86 @@
+/*!
+ Material Components for the web
+ Copyright (c) 2017 Google Inc.
+ License: Apache-2.0
+*/
+
+body
+{
+  background-color: #ffffff;
+}
+
+.main-menu {
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  margin-right: 24px;
+  color: #bdbdbd;
+  box-sizing: border-box;
+}
+
+.pfp_circle {
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.chat_message_left_padding {
+    padding-left: 15px;
+}
+
+.chat_box_align_bottom_left{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.center-div
+{
+  margin: 0 auto;
+  width: 80%; 
+  background-color: #ffffff;
+}
+
+.turquoise
+{
+    background-color: #8AFFEC;
+}
+
+.white_bg
+{
+    background-color: #ffffff;
+}
+
+.black_txt
+{
+    color: #000000;
+}
+
+.dark_pink_txt
+{
+    color: #FF017E;
+}
+
+.dark_turquoise
+{
+    background-color: #2DEECF;
+    color: #2DEECF;
+}
+
+.light_blue
+{
+    color: #08E8DE;
+}
+
+.light_turquoise
+{
+    color: #00FFEC;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column-reverse;
+}

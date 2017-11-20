@@ -1,0 +1,65 @@
+<html class="mdc-typography">
+  <head>
+    <title class=titlename>Friend Quiz</title>
+    <link rel="stylesheet" href="./material-components-web.css"/>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="790366436769-1pqbl5q0ovtqe0ebanpmo90g9r80l6g9.apps.googleusercontent.com">
+  </head>
+  <body>
+    <div class="mdc-card center-div" style = "text-align: center">
+      <section class="mdc-card__primary">
+        <div class="mdc-typography--display1" style="text-align:center; color:#000000">Friend Quiz!</div>
+        <br>
+        <div class="mdc-typography--heading infotext" style="text-align:center; color:#000000">Continue with Google to sign in:</div>
+        <br>
+        <div class="g-signin2" style="display: inline-block" data-onsuccess="onSignIn"></div>
+        <br>
+
+        <div>
+
+        </div>
+
+      </section>
+    </div>
+  </body>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+  var socket = io();
+  $(function () {
+    socket.emit('clientconnect');
+    socket.on("serverconnect", function(msg){
+      console.log("connected to syncchat server");
+    });
+    $('.create_button').click(function(){
+      socket.emit('', [$('.username_box').val(), $('.password_box').val()]);
+    });
+    socket.on("err_username", function(msg){
+      console.log("wrong username on login");
+    });
+    socket.on("err_password", function(msg){
+      console.log("wrong password on login");
+    });
+    socket.on("login_success", function(msg){
+      console.log("login success!");
+      socket.emit('get_question', 0);
+      //window.location.href = "https://harmony-net.azurewebsites.net/chat"; //"https://harmony-net.herokuapp.com/chat"; or is it
+    });
+  });
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    var id_token = googleUser.getAuthResponse().id_token;
+    socket.emit("login_attempt", [id_token, profile.getId()]);
+  }
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+  </script>
+</html>

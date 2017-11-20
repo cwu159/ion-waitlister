@@ -1,0 +1,372 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Harmony</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="790366436769-1pqbl5q0ovtqe0ebanpmo90g9r80l6g9.apps.googleusercontent.com">
+    <link rel="icon" type="image/png" href="http://i.imgur.com/qb41lcB.png" />
+    <link rel="stylesheet" href="./predef.css"/>
+    <script src="https://material-components-web.appspot.com/assets/index.css.js" charset="utf-8"></script>
+    <script src="https://web.archive.org/web/20170603210016js_/http://material-components-web.appspot.com/assets/material-components-web.css.js" charset="utf-8"></script>
+    <script src="https://web.archive.org/web/20170923110745js_/http://material-components-web.appspot.com/assets/demo-styles.css.js" charset="utf-8"></script>
+    <script src="https://web.archive.org/web/20170603210016js_/http://material-components-web.appspot.com/assets/material-components-web.css.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+    /* Ensure layout covers the entire screen. */
+    /* hey there */ 
+    html {
+      height: 100%;
+    }
+    /* Place drawer and content side by side. */
+    .demo-body {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      min-height: 100%;
+      width: 100%;
+    }
+    /* Stack toolbar and main on top of each other. */
+    .demo-content {
+      display: inline-flex;
+      flex-direction: column;
+      flex-grow: 1;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    /* Place drawer above toolbar shadow. */
+    .mdc-permanent-drawer {
+      z-index: 2;
+    }
+    .demo-main {
+      padding-left: 16px;
+    }
+
+    .demo-paragraph {
+        margin: 0px;
+        padding: 20px 28px;
+    }
+    @media (max-width: 599px) {
+      .demo-paragraph {
+        padding: 16px;
+      }
+    }
+    </style>
+  </head>
+  <body class="demo-body mdc-typography">
+    <nav class="mdc-permanent-drawer" style="width:40%">
+      <div class="mdc-permanent-drawer__toolbar-spacer"></div>
+      <div class="mdc-list-group" style="overflow-y:scroll; height:90%;">
+        <nav id="basic-tab-bar" class="mdc-tab-bar mdc-tab-bar-upgraded" style="width:40px">
+          <a class="mdc-tab mdc-ripple-upgraded" id="new_chat_button" href="#" style="width:13%; --mdc-ripple-surface-width:160px; --mdc-ripple-surface-height:48px; --mdc-ripple-fg-size:96px; --mdc-ripple-fg-scale:1.84422;">New Chat</a>
+          <a class="mdc-tab mdc-ripple-upgraded mdc-tab--active mdc-ripple-upgraded--background-active-fill mdc-ripple-upgraded--foreground-activation" id="my_chats_button" href="#" style="width:13%; --mdc-ripple-surface-width:160px; --mdc-ripple-surface-height:48px; --mdc-ripple-fg-size:96px; --mdc-ripple-fg-scale:1.84422; --mdc-ripple-fg-translate-start:14px, -21px; --mdc-ripple-fg-translate-end:32px, -24px;">My Chats</a>
+          <!--<a class="mdc-tab mdc-ripple-upgraded" id="chat_options_button" href="#" style="width:13%; --mdc-ripple-surface-width:160px; --mdc-ripple-surface-height:48px; --mdc-ripple-fg-size:96px; --mdc-ripple-fg-scale:1.84422;">Options</a>-->
+          <span class="mdc-tab-bar__indicator" style="transform: translateX(160px) scale(0.333333, 1); visibility: visible;"></span>
+        </nav>
+        <nav class="mdc-list mdc-list--dense mdc-list--two-line mdc-list--avatar-list">
+          <div id="main-nav-bar_wrapper" style="padding-left:0%">
+            <div id="main-nav-bar">
+
+            </div>
+
+            <div id="wrapper_new_chat_menu" style="padding-left:50%; display:none">
+              <div style="padding-left:10%"><div id="new_chat_error_message">
+
+              </div></div>
+              <h1 class="mdc-typography--title" style="padding-left:10%">Chat Name:</h1>
+              <div style="padding-left:10%"><div class="mdc-textfield mdc-textfield--box" data-demo-no-auto-js="">
+                <input type="text" class="mdc-textfield__input" id="new_chat_name_textbox" placeholder="Chat name">
+              </div></div>
+              <h1 class="mdc-typography--title" style="padding-left:10%">People:</h1>
+              <div id="wrapper_new_chat_people" style="padding-left:15%">
+
+              </div>
+              <div style="padding-left:10%"><div class="mdc-textfield mdc-textfield--box" data-demo-no-auto-js="">
+                <input type="text" class="mdc-textfield__input" id="new_chat_people_textbox" placeholder="Search users">
+              </div></div>
+              <div id="wrapper_new_chat_search_box" style="padding-left:20%">
+
+              </div>
+              <div style="padding-left:10%"><button class="mdc-button mdc-button--raised mdc-ripple-upgraded" style="background-color:#00FFEC" onclick="submit_create_new_chat()">Create</button></div>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+    </nav>
+
+
+    <header class="mdc-toolbar mdc-toolbar--fixed">
+      <div class="mdc-toolbar__row white_bg">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <a href="#" class="home"><img src="http://i.imgur.com/5mwcjS1.png" alt="logo" height=60 width=60></a>
+          <span class="mdc-toolbar__title dark_pink_txt">Harmony Chat</span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Download" alt="Download">file_download</a>
+        </section>
+      </div>
+    </header>
+
+
+    <main style="width:60%">
+      <div class="mdc-toolbar-fixed-adjust" id="main_chat_window_wrapper" style="overflow-y:scroll; height:80%;"> <!--TODO FIX THIS TERRIBLE WORKAROUND CSS-->
+        <p class="demo-paragraph" id="main_chat_window">
+          <!--chatbox-->
+        </p>
+      </div>
+      <div class="mdc-textfield--box" style="width:100%; height:10%">
+        <input type="text" class="mdc-textfield__input main_chat_box" id="css-only-textfield-box" placeholder="Send a message">
+      </div>
+    </main>
+
+    <!--TODO AUTOSCROLL TO BOTTOM OF CHAT MESSAGES LIST-->
+
+  </body>
+
+  <script src="https://web.archive.org/web/20170627002747js_/http://material-components-web.appspot.com/assets/material-components-web.js" charset="utf-8"></script>
+  
+
+
+    <script>
+      (function() {
+        setTimeout(function () {
+          window.basicTabBar = new mdc.tabs.MDCTabBar(document.querySelector('#basic-tab-bar'));
+        },200)
+      })();
+    </script>
+
+
+
+
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+  var id_token = "not_set_yet";
+  var current_chat_id = "no_chat_selected";
+  var new_chat_add_users_list = [];
+  var socket = io();
+  //var scrolled = false;
+
+  $(function () {
+    socket.emit('clientconnect');
+    socket.on("serverconnect", function(msg){
+      console.log("connected to syncchat server");
+    });
+
+    $(".main_chat_box").on('keyup', function (e) {
+      if (e.keyCode == 13) {
+        console.log("message sending... "+$(".main_chat_box").val());
+        socket.emit("send_message", [id_token, $(".main_chat_box").val(), current_chat_id]);
+        socket.emit("read_message", [id_token, current_chat_id]);
+        $(".main_chat_box").val("");
+        //socket.emit("get_user_chat_info", [id_token, 'me (legacy)', msg[1], msg[0]['message_id']])
+        //var d1 = document.getElementById('main_chat_window'); //TODO make date 09 instead of 9
+        //d1.insertAdjacentHTML(msg[2], '<a class="mdc-list-item mdc-permanent-drawer--selected" id="'+msg[1]+"/"+msg[0]['message_id']+"/chat"+'" href="#" onClick=""><img class="pfp_circle" src="'+"http://phylo.cs.mcgill.ca/assets/img/loading.gif"+'" id="'+msg[1]+"/"+msg[0]['message_id']+"/pfp"+'" alt="chat pfp" style="width:height; height:80%;"><span class="mdc-list-item__text chat_message_left_padding">'+msg[0]['text']+'<span class="mdc-list-item__text__secondary" id="'+msg[1]+"/"+msg[0]['message_id']+"/name_date"+'">'+new Date(msg[0]['date']).getHours()+":"+new Date(msg[0]['date']).getMinutes()+'</span></span></a>');
+      }
+     });
+
+    $("#new_chat_people_textbox").on('input', function() {
+      //TODO prevent duplicates for adding same person
+      //TODO case sensitivity for search names
+      console.log($("#new_chat_people_textbox").val());
+      socket.emit("search_people_new_chat", [id_token, $("#new_chat_people_textbox").val()]);
+    });
+
+    socket.on("login_success", function(msg){
+      console.log("login success!");
+      socket.emit("put_socket_id", [id_token, socket.id]);
+      socket.emit("refresh_chats", [id_token]);
+    });
+
+    socket.on("new_refresh_chats", function(msg){
+      console.log("refreshing chats again");
+      document.getElementById("main-nav-bar").innerHTML="";
+      socket.emit("refresh_chats", [id_token]);
+    });
+
+    socket.on("put_refreshed_chat", function(msg){
+      document.getElementById("wrapper_new_chat_menu").style.display="none";
+      //console.log("putting refreshed chat #"+msg[1]);
+      var d1 = document.getElementById('main-nav-bar');
+      d1.insertAdjacentHTML('afterBegin', '<a class="mdc-list-item mdc-permanent-drawer--selected" id="'+msg[0]['id']+'" href="#" onClick="switch_chat(this.id)"><img src="'+msg[0]['chat_pfp']+'" alt="chat pfp" style="width:height; height:80%;"><span class="mdc-list-item__text">'+msg[0]['name']+'<span id="'+msg[0]['id']+"/latest_chat_message"+'" class="mdc-list-item__text__secondary">'+"Message:  "+msg[0]['messages'][msg[0]['messages'].length-1]['text']+'</span></span></a>');
+      if(msg[0]['read_last'][msg[2]]==undefined){
+        document.getElementById(msg[0]['id']+"/latest_chat_message").style=document.getElementById(msg[0]['id']+"/latest_chat_message").style+"; font-weight:bold; color:gold";
+      }else if(msg[0]['read_last'][msg[2]]['message_index']!=msg[0]['messages'].length-1){
+        document.getElementById(msg[0]['id']+"/latest_chat_message").style=document.getElementById(msg[0]['id']+"/latest_chat_message").style+"; font-weight:bold; color:gold";
+      }else{ //user has read the last message
+        //do nothing
+      }
+    });
+
+    socket.on("clear_current_messages", function(msg){
+      $('#main_chat_window').empty();
+    });
+
+    socket.on("message", function(msg){
+      //TODO change order of chats
+      //TODO make sure user is still on this chat
+
+      //TODO scroll with multiple messages?
+      //updateScroll();
+      var isScrolledToBottom = document.getElementById("main_chat_window_wrapper").scrollHeight - document.getElementById("main_chat_window_wrapper").clientHeight <= document.getElementById("main_chat_window_wrapper").scrollTop + 1;
+
+
+      if(msg[2]=="beforeEnd"){
+        document.getElementById(msg[1]+"/latest_chat_message").innerHTML="Message:  "+msg[0]['text'];
+        document.getElementById("main-nav-bar").insertAdjacentElement("afterBegin", document.getElementById(msg[1]));
+        if(msg[1]!=current_chat_id){
+          play_notif("/audio/that_aint_on_the_news.wav");
+          document.getElementById(msg[1]+"/latest_chat_message").style=document.getElementById(msg[1]+"/latest_chat_message").style+"; font-weight:bold; color:gold";
+        }
+      }
+      if(msg[1]==current_chat_id){
+        var out = document.getElementById("main_chat_window_wrapper");
+        // allow 1px inaccuracy by adding 1
+        var isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1;
+        if(isScrolledToBottom){
+          out.scrollTop = out.scrollHeight - out.clientHeight;
+        }
+        socket.emit("get_user_chat_info", [id_token, msg[0]['user'], msg[1], msg[0]['message_id']])
+        var d1 = document.getElementById('main_chat_window'); //TODO make date 09 instead of 9
+        d1.insertAdjacentHTML(msg[2], '<a class="mdc-list-item mdc-permanent-drawer--selected" id="'+msg[1]+"/"+msg[0]['message_id']+"/chat"+'" href="#" onClick=""><img class="pfp_circle" src="'+"http://phylo.cs.mcgill.ca/assets/img/loading.gif"+'" id="'+msg[1]+"/"+msg[0]['message_id']+"/pfp"+'" alt="chat pfp" style="width:height; height:80%;"><span class="mdc-list-item__text chat_message_left_padding">'+msg[0]['text']+'<span class="mdc-list-item__text__secondary" id="'+msg[1]+"/"+msg[0]['message_id']+"/name_date"+'">'+new Date(msg[0]['date']).getHours()+":"+new Date(msg[0]['date']).getMinutes()+'</span></span></a>');
+        if(msg[1]==current_chat_id){
+          socket.emit("read_message", [id_token, msg[1]]);
+        }
+      }
+
+      if(isScrolledToBottom){
+        document.getElementById("main_chat_window_wrapper").scrollTop = document.getElementById("main_chat_window_wrapper").scrollHeight - document.getElementById("main_chat_window_wrapper").clientHeight;
+      }
+      
+    });
+
+    socket.on("send_user_chat_info", function(msg){
+      document.getElementById(msg[0]+"/"+msg[1]+"/name_date").insertAdjacentText('afterBegin', msg[2]+" "+msg[3]+"  ");
+      document.getElementById(msg[0]+"/"+msg[1]+"/pfp").src=msg[4];
+    });
+
+    socket.on("new_chat_user_search_clear_current_results", function(msg){
+      $("#wrapper_new_chat_search_box").empty();
+    });
+
+    socket.on("new_chat_user_search_result", function(msg){
+      document.getElementById("wrapper_new_chat_search_box").insertAdjacentHTML('afterBegin', '<a class="mdc-list-item mdc-permanent-drawer--selected" id="'+msg[2]+'" href="#" onClick="new_chat_add_user(this.id)"><img class="pfp_circle" src="'+msg[1]+'" alt="chat pfp" style="width:height; height:80%;"><span class="mdc-list-item__text chat_message_left_padding">'+msg[0]+'<span class="mdc-list-item__text__secondary">'+"click to add"+'</span></span></a>');
+    });
+
+    socket.on("set_name_pfp_added_users", function(msg){
+      document.getElementById(msg[0]+"/new_chat_added_user_pfp").src=msg[2];
+      document.getElementById(msg[0]+"/new_chat_added_user_name").insertAdjacentHTML("afterBegin", msg[1]);
+      document.getElementById(msg[0]+"/new_chat_added_subtext").innerHTML="click to remove";
+    });
+
+    $('#new_chat_button').click(function(){
+      $('#main-nav-bar').empty();
+      document.getElementById("new_chat_error_message").innerHTML="";
+      document.getElementById("wrapper_new_chat_menu").style.display="inline";
+      document.getElementById("wrapper_new_chat_menu").style.paddingLeft="100px";
+      new_chat_add_users_list = [];
+    });
+
+     $('#my_chats_button').click(function(){
+      $('#main-nav-bar').empty();
+      socket.emit("refresh_chats", [id_token]);
+    });
+
+    /*$("#main_chat_window").on('scroll', function(){
+      console.log($("#main_chat_window").scrollTop());
+      console.log($("#main_chat_window").innerHeight());
+      console.log($("#main_chat_window").scrollHeight());
+      if($("#main_chat_window").scrollTop()+$("#main_chat_window").innerHeight() >= $("#main_chat_window").scrollHeight()-20){
+        scrolled=false;
+      }else{
+        scrolled=true;
+      }
+    });*/
+  });
+
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    id_token = googleUser.getAuthResponse().id_token;
+    my_id = profile.getId();
+    socket.emit("login_attempt", [id_token, profile.getId()]);
+  }
+
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+  function switch_chat(id) {
+    console.log("switching chats to: "+id);
+    if(current_chat_id!="no_chat_selected"){
+      document.getElementById(current_chat_id).style.backgroundColor="";
+    }
+    document.getElementById(id).style.backgroundColor="lightGrey";
+    current_chat_id = id;
+    socket.emit("get_messages", [id_token, id, 0, 10]);
+    socket.emit("read_message", [id_token, id]);
+    document.getElementById(id+"/latest_chat_message").style=document.getElementById(id+"/latest_chat_message").style+"; font-weight:normal; color:none";
+  }
+
+  function new_chat_add_user(id) {
+    $("#new_chat_people_textbox").val("");
+    $("#wrapper_new_chat_search_box").empty();
+    if(document.getElementById(id+"/new_chat_added_user_name")==null && id!=my_id){
+      new_chat_add_users_list[new_chat_add_users_list.length]=id;
+      document.getElementById("new_chat_error_message").innerHTML="";
+      document.getElementById("wrapper_new_chat_people").insertAdjacentHTML('afterBegin', '<a class="mdc-list-item mdc-permanent-drawer--selected" id="'+id+"/new_chat_added_user"+'" href="#" onClick="new_chat_remove_user(this.id)"><img id="'+id+"/new_chat_added_user_pfp"+'" class="pfp_circle" src="'+"http://phylo.cs.mcgill.ca/assets/img/loading.gif"+'" alt="chat pfp" style="width:height; height:80%;"><span id="'+id+"/new_chat_added_user_name"+'" class="mdc-list-item__text chat_message_left_padding">'+'<span id="'+id+"/new_chat_added_subtext"+'" class="mdc-list-item__text__secondary">'+"click to remove"+'</span></span></a>');
+      socket.emit("get_name_pfp_added_users", [id_token, id]);
+      console.log(new_chat_add_users_list[new_chat_add_users_list.length-1]);
+    }else{
+      document.getElementById("new_chat_error_message").insertAdjacentHTML('afterBegin', '<h1 class="mdc-typography--title" style="color:red">Please do not add someone twice</h1>');
+    }
+  }
+
+  function new_chat_remove_user(id_element) {
+    var id =  id_element.substring(id_element.length-20);
+    new_chat_add_users_list.splice(new_chat_add_users_list.indexOf(id), 1);
+    if(document.getElementById(id_element)!=null){
+      document.getElementById(id_element).parentElement.removeChild(document.getElementById(id_element));
+    }
+  }
+
+  function submit_create_new_chat() {
+    var chat_name = document.getElementById("new_chat_name_textbox").value;
+    console.log(chat_name);
+    if(chat_name!="" && chat_name!=" " && chat_name!=null){
+      console.log("valid chat name");
+      socket.emit("create_new_chat", [id_token, new_chat_add_users_list, chat_name]);
+      new_chat_add_users_list = [];
+      document.getElementById("new_chat_error_message").innerHTML="Chat created!";
+      document.getElementById("wrapper_new_chat_search_box").innerHTML="";
+      document.getElementById("wrapper_new_chat_people").innerHTML="";
+      document.getElementById("new_chat_people_textbox").value=""; //TODO make it blank after creation
+    }else{
+      console.log("invalid chat name");
+      document.getElementById("new_chat_error_message").innerHTML="";
+      document.getElementById("new_chat_error_message").insertAdjacentHTML('afterBegin', '<h1 class="mdc-typography--title" style="color:red">Please type a valid chat name</h1>');
+    }
+  }
+
+  function play_notif(filename){
+    var notif = new Audio(filename);
+    notif.play();
+  }
+
+  
+  /*function updateScroll(){
+    if(!scrolled){
+      var element = document.getElementById("main_chat_window");
+      element.scrollTop = element.scrollHeight;
+    }
+  }*/
+
+  </script>
+</html>
